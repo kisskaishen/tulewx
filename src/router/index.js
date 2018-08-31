@@ -9,6 +9,8 @@ const UserIndex = r => require.ensure([], () => r(require('@/view/user/index')),
 
 const DetailIndex = r => require.ensure([], () => r(require('@/view/detail/index')), 'DetailIndex')
 
+const PayIndex = r => require.ensure([], () => r(require('@/view/pay/index')), 'PayIndex')
+
 
 Vue.use(Router)
 
@@ -17,25 +19,12 @@ export default new Router({
     routes: [
         {
             path: '/',
+            redirect: '/index',
             component: IndexIndex,
             children: [
                 {
                     path: '/index',
                     component: IndexIndex,
-                    children: [
-                        {
-                            path: '/index/index',
-                            component: IndexIndex,
-                            meta: {
-                                title: '首页',
-                                login: false
-                            }
-                        }
-                    ],
-                    meta: {
-                        title: '首页',
-                        login: false
-                    }
                 }
             ],
             meta: {
@@ -44,58 +33,37 @@ export default new Router({
             }
         },
         {
-            path: '/equip',
+            path: '/equip/index',
             component: EquipIndex,
-            children: [
-                {
-                    path: '/equip/index',
-                    component: EquipIndex,
-                    meta: {
-                        title: '装备专区',
-                        login: false
-                    }
-                }
-            ],
             meta: {
                 title: '装备专区',
                 login: false
             }
         },
         {
-            path: '/user',
+            path: '/user/index',
             component: UserIndex,
-            children: [
-                {
-                    path: '/user/index',
-                    component: UserIndex,
-                    meta: {
-                        title: '个人中心',
-                        login: true
-                    }
-                }
-            ],
             meta: {
                 title: '个人中心',
                 login: true
             }
         },
         {
-            path: '/detail',
+            path: '/detail/index',
             component: DetailIndex,
-            children: [
-                {
-                    path: '/detail/index',
-                    component: DetailIndex,
-                    meta: {
-                        title: '商品详情',
-                        login: false
-                    }
-                }
-            ],
             meta: {
                 title: '商品详情',
-                login: false
+                login: true
             }
         },
+        {
+            path: '/pay/index',
+            component: PayIndex,
+
+            meta: {
+                title: '提交订单',
+                login: true
+            }
+        }
     ]
 })
