@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 const IndexIndex = r => require.ensure([], () => r(require('@/view/index/index')), 'IndexIndex')
 
+const CartIndex = r => require.ensure([], () => r(require('@/view/cart/index')), 'CartIndex')
+
 const EquipIndex = r => require.ensure([], () => r(require('@/view/equip/index')), 'EquipIndex')
 
 const UserIndex = r => require.ensure([], () => r(require('@/view/user/index')), 'UserIndex')
@@ -29,6 +31,15 @@ export default new Router({
             ],
             meta: {
                 title: '首页',
+                login: false
+            }
+        },
+        {
+
+            path: '/cart/index',
+            component: CartIndex,
+            meta: {
+                title: '惠民卡',
                 login: false
             }
         },

@@ -60,9 +60,12 @@
         </div>
         <div class="btnDiv">
             <div class="btn">
-                <div class="goHome ft666" @click="goHome">回到首页</div>
+                <div class="goHome ft666" @click="goHome"><i></i><span>首页</span></div>
                 <div class="cantact">
-                    <a href="tel:13798238693">联系客服</a>
+                    <a href="tel:13798238693">
+                        <i></i>
+                        <span>联系客服</span>
+                    </a>
                 </div>
                 <div class="goBtn">
                     <button class="ft32" @click="goPay">立即预定</button>
@@ -201,9 +204,24 @@
                 align-items: center;
                 .goHome {
                     flex: 1;
+                    border-right: 1px solid #eee;
+                    i {
+                        margin: 0 auto;
+                        width: 48px;
+                        height: 48px;
+                        background: url("../../imgs/icon-go-home.png") no-repeat center /100%;
+                    }
                 }
                 .cantact {
                     flex: 1;
+                    a {
+                        i {
+                            margin: 0 auto;
+                            width: 48px;
+                            height: 48px;
+                            background: url("../../imgs/icon-tel.png") no-repeat center /100%;
+                        }
+                    }
                 }
                 .goBtn {
                     flex: 4;

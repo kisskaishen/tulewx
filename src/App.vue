@@ -8,7 +8,23 @@
 
 <script>
     export default {
-        name: 'App'
+        name: 'App',
+        data() {
+            return {
+
+            }
+        },
+        mounted() {
+            // this.getInfo()
+        },
+        methods:{
+            getInfo() {
+                this.$post('member/Wxchat/get_snsapi_userinfo',{})
+                    .then(res=>{
+                        console.log(res)
+                    })
+            }
+        }
     }
 </script>
 
@@ -25,6 +41,7 @@
         right: 0;
         top: 0;
         min-height: 100%;
+
     }
     .title {
         display: flex;
@@ -62,6 +79,9 @@
     .ft36 {
         font-size: 36px;
     }
+    .ft40 {
+        font-size: 40px;
+    }
     .ft48 {
         font-size: 48px;
     }
@@ -76,6 +96,9 @@
     }
     .c000 {
         color: #000;
+    }
+    .cfff {
+        color: #fff;
     }
     .cff464e {
         color: #ff464e;

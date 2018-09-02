@@ -10,6 +10,21 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
 
+import {get, post, upload, baseUrl} from './config/api'
+import {setCookie, getCookie, clearCookie} from './config/util'
+import Util from './config/util'
+
+Vue.use(Util)
+
+Vue.prototype.$setCookie = setCookie
+Vue.prototype.$getCookie = getCookie
+Vue.prototype.$clearCookie = clearCookie
+
+Vue.prototype.$baseUrl = baseUrl
+Vue.prototype.$post = post
+Vue.prototype.$get = get
+Vue.prototype.$upload = upload
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
