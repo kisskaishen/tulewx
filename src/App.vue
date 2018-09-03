@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <transition name="fade-in">
-            <router-view/>
-        </transition>
+        <!--<transition name="fade">-->
+        <router-view/>
+        <!--</transition>-->
     </div>
 </template>
 
@@ -10,17 +10,15 @@
     export default {
         name: 'App',
         data() {
-            return {
-
-            }
+            return {}
         },
         mounted() {
             // this.getInfo()
         },
-        methods:{
+        methods: {
             getInfo() {
-                this.$post('member/Wxchat/get_snsapi_userinfo',{})
-                    .then(res=>{
+                this.$post('member/Wxchat/get_snsapi_userinfo', {})
+                    .then(res => {
                         console.log(res)
                     })
             }
@@ -30,19 +28,16 @@
 
 <style lang="scss">
     @import 'style/base.css';
+
     #app {
-        font-family: 'Avenir', PingFang-SC-Bold, Helvetica, Arial, sans-serif;
+        font-family: '黑体', 'Avenir', PingFang-SC-Bold, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        min-height: 100%;
-
+        width: 100%;
     }
+
     .title {
         display: flex;
         justify-content: flex-start;
@@ -58,48 +53,63 @@
             color: #333;
         }
     }
+
     .red {
         color: red;
     }
+
     .ft24 {
         font-size: 24px;
     }
+
     .ft26 {
         font-size: 26px;
     }
+
     .ft28 {
         font-size: 28px;
     }
+
     .ft30 {
         font-size: 30px;
     }
+
     .ft32 {
         font-size: 32px;
     }
+
     .ft36 {
         font-size: 36px;
     }
+
     .ft40 {
         font-size: 40px;
     }
+
     .ft48 {
         font-size: 48px;
     }
+
     .c999 {
         color: #999;
     }
+
     .c666 {
         color: #666;
     }
+
     .c333 {
         color: #333;
     }
+
     .c000 {
         color: #000;
     }
+
     .cfff {
         color: #fff;
     }
+
     .cff464e {
         color: #ff464e;
     }

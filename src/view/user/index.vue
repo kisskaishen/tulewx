@@ -3,6 +3,7 @@
         <div class="userInfoDiv">
             <img src="https://cdn2.pinquduo.cn/5b2324aa8ae6984510.jpg" alt="头像">
             <p class="ft36 cfff">0的离心率</p>
+            <p class="ft28 cfff">（点击绑定信息）</p>
         </div>
         <div class="menuDiv">
             <div class="ft28">
@@ -10,11 +11,11 @@
                     <i></i>
                     <span>我的订单</span>
                 </p>
-                <router-link to="">查看全部订单 <i></i></router-link>
+                <router-link to="/user/order">查看全部订单<i></i></router-link>
             </div>
             <ul>
                 <li v-for="item,index in menuList">
-                    <router-link to="">
+                    <router-link :to="`/user/order?type=${item.value}`">
                         <i></i>
                         <span>{{item.label}}</span>
                     </router-link>
@@ -47,15 +48,15 @@
         data() {
             return {
                 menuList: [
-                    {label: '已支付', value: '1'},
-                    {label: '未支付', value: '2'},
+                    {label: '已支付', value: '20'},
+                    {label: '未支付', value: '10'},
                     {label: '已过期', value: '3'}
                 ],
                 moreList: [
-                    {label: '游客列表', url: '/'},
-                    {label: '我的信息', url: '/'},
-                    {label: '常见问题', url: '/'},
-                    {label: '关于途乐', url: '/'},
+                    {label: '游客列表', url: '/user/travel'},
+                    {label: '我的信息', url: '/user/myInfo'},
+                    {label: '常见问题', url: '/user/question'},
+                    {label: '关于途乐', url: '/user/about'},
 
                 ]
             }
@@ -70,6 +71,7 @@
 
 <style scoped lang="scss">
     .userDiv {
+        padding-bottom: 100px;
         .userInfoDiv {
             width: 100%;
             padding: 60px 0;
@@ -82,8 +84,9 @@
                 border-radius: 50%;
             }
             p {
-                margin-top: 40px;
+                margin-top: 20px;
             }
+
         }
         .menuDiv {
             padding: 0 26px;
@@ -125,14 +128,14 @@
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        padding: 26px 0;
+                        padding: 16px 0;
                         i {
-                            width: 80px;
-                            height: 80px;
+                            width: 60px;
+                            height: 60px;
                         }
                         span {
-                            margin-top: 20px;
-                            font-size: 28px;
+                            margin-top: 8px;
+                            font-size: 26px;
                             color: #666;
                         }
                     }

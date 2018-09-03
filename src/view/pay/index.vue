@@ -2,23 +2,23 @@
     <div class="payIndex">
         <div class="detailDiv">
             <div class="divFl">
-                <img src="https://cdn2.pinquduo.cn/5b2324aa8ae6984510.jpg" alt="">
+                <img :src="payInfo.ticket.ticket_img" :alt="payInfo.ticket.ticket_name">
             </div>
             <div class="divFr">
-                <p class="name ft30 ft666">商品名称</p>
-                <p class="price ft32 cff464e">成人价：￥99</p>
-                <p class="price ft30 cff464e">儿童价：￥99</p>
+                <p class="name ft30 ft666">{{payInfo.ticket.ticket_name}}</p>
+                <p class="price ft32 cff464e">成人价：￥{{payInfo.ticket.price}}</p>
+                <p class="price ft30 cff464e">儿童价：￥{{payInfo.ticket.child_price}}</p>
                 <p class="other ft26 c999">注意事项</p>
             </div>
         </div>
         <div class="bindingDiv">
-            <p>您当前账户手机号为：13798238693</p>
+            <p>您当前账户手机号为：{{payInfo.is_bind_mobile}}</p>
         </div>
         <div class="travalDiv">
             <ul>
-                <li v-for="item,index in userList" :class="[{active:checkArr[index]},'brs8']"
+                <li v-for="item,index in userList" :class="[{active:userList[index].state},'brs8']"
                     @click="checkUser(item,index)">
-                    <p>{{item.name}}</p>
+                    <p>{{item.visit_name}}</p>
                 </li>
                 <li class="addBtn" @click="goAddUser">
                     <p>+</p>
@@ -28,11 +28,11 @@
         <div class="travalInfoDiv">
             <ul>
                 <li v-for="item,index in checkArr" v-if="item!=false">
-                    <div class="title"><b></b><span>{{item.name}}的信息</span></div>
+                    <div class="title"><b></b><span>{{item.visit_name}}的信息</span></div>
                     <div class="traval">
-                        <p><label>姓名</label><span>{{item.name}}</span></p>
-                        <p><label>手机号</label><span>{{item.tel}}</span></p>
-                        <p><label>身份证</label><span>{{item.identity}}</span></p>
+                        <p><label>姓名</label><span>{{item.visit_name}}</span></p>
+                        <p><label>手机号</label><span>{{item.visit_phone}}</span></p>
+                        <p><label>身份证</label><span>{{item.vist_idcard_num}}</span></p>
                     </div>
                 </li>
             </ul>
@@ -81,43 +81,70 @@
 </template>
 
 <script>
+    import {Toast} from 'mint-ui'
     export default {
         name: "payIndex",
         data() {
             return {
-                userList: [
-                    {name: '秦文凯', tel: '13798238693', identity: '410823199510240078'},
-                    {name: 'kisskai', tel: '13798238693', identity: '410823199510240078'},
-                    {name: 'qwk', tel: '13798238693', identity: '410823199510240078'},
-                ],
+                payInfo: {ticket: {}},            // 支付页信息
+                userList: [],
                 checkArr: [],
 
-                isShowDialog:false,
+                isShowDialog: false,
                 name: '',            // 姓名
                 tel: '',            // 手机号
                 identity: '',            // 身份证号
-                stature: '1',            // 身高
+                stature: '0',            // 身高
                 statures: [
-                    {value: '1', label: '高于1.2米(含)'},
-                    {value: '2', label: '低于1.2米'}
+                    {value: '0', label: '高于1.2米(含)'},
+                    {value: '1', label: '低于1.2米'}
                 ]
             }
         },
         mounted() {
-            this.isCheckArr()
+            this.getDetail()
+            this.getTravel()
         },
         methods: {
+            // 获取支付页情况
+            getDetail() {
+                this.$post('order/buy/cashier_desk', {
+                    ticket_id: this.$route.query.ticket_id,
+                    member_id: this.$getCookie('member_id') || '4'
+                })
+                    .then(res => {
+                        if (res.code == '200') {
+                            this.payInfo = res.data
+                        }
+                    })
+            },
+            // 获取游客列表
+            getTravel() {
+                this.$post('member/Visiter/visiter_list', {
+                    member_id: this.$getCookie('member_id') || '4'
+                })
+                    .then(res => {
+                        if (res.code == '200') {
+                            this.userList = res.data
+                        }
+                    })
+            },
             // 勾选情况
             checkUser(val, index) {
-                for (let i = 0; i < this.checkArr.length; i++) {
-                    if (i == index) {
-                        this.checkArr[index] ? this.checkArr.splice(index, 1, false) : this.checkArr.splice(index, 1, val)
-                    }
-                }
-            },
-            isCheckArr() {
                 for (let i = 0; i < this.userList.length; i++) {
-                    this.checkArr.push(false)
+                    if (i == index) {
+                        if (this.userList[i].state == false) {
+                            this.userList[i].state = true
+                            this.checkArr.push(this.userList[i])
+                        } else {
+                            this.userList[i].state = false
+                            for (let j = 0; j < this.checkArr.length; j++) {
+                                if (this.userList[i].state == this.checkArr[j].state) {
+                                    this.checkArr.splice(j, 1)
+                                }
+                            }
+                        }
+                    }
                 }
             },
 
@@ -136,7 +163,20 @@
             },
             // 确定添加游客
             sureAddUser() {
-                this.isShowDialog = true
+                this.$post('member/Visiter/visiter_add',{
+                    member_id: this.$getCookie('member_id') || '4',
+                    visit_name:this.name,
+                    visit_phone:this.tel,
+                    vist_idcard_num:this.identity,
+                    is_child:this.stature
+                })
+                    .then(res=>{
+                        if (res.code == '200') {
+                            Toast('添加成功~')
+                            this.getTravel()
+                            this.isShowDialog = false
+                        }
+                    })
             }
         }
     }

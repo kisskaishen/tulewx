@@ -2,31 +2,31 @@
     <div class="detailDiv">
         <div class="bannerDiv">
             <mt-swipe :auto="4000" :showIndicators="false" @change="handleChange">
-                <mt-swipe-item v-for="item,index in 4" :key="index">
-                    <img src="https://cdn2.pinquduo.cn/5b2324aa8ae6984510.jpg" alt="商品图片">
+                <mt-swipe-item>
+                    <img :src="ticketInfo.ticket_img" alt="商品图片">
                 </mt-swipe-item>
             </mt-swipe>
             <div class="switchDiv">
-                {{index}}/4
+                {{index}}/1
             </div>
         </div>
         <div class="detailDiv">
             <div class="divFl">
-                <p class="name ft32 c666">商品名称商品名称商品名称商品名称商品名称</p>
+                <p class="name ft32 c666">{{ticketInfo.ticket_name}}</p>
                 <p class="other">
                     <label class="ft28 c666">发车时间：</label>
-                    <span class="ft30 c333">2018-10-01</span>
+                    <span class="ft30 c333">{{ticketInfo.leave_date}}</span>
                 </p>
                 <p class="other">
                     <label class="ft28 c666">已报名：</label>
-                    <span class="ft30 c333">10</span>
+                    <span class="ft30 c333">{{ticketInfo.enrolled}}</span>
                 <p class="other ft30 c666">
                     <label class="ft28 c666">剩余座位：</label>
-                    <span class="ft30 c333">20</span>
+                    <span class="ft30 c333">{{ticketInfo.real_num}}</span>
                 </p>
                 <p class="other">
                     <label class="ft28 c666">儿童价：</label>
-                    <b class="ft30 cff464e">￥20</b>
+                    <b class="ft30 cff464e">￥{{ticketInfo.child_price}}</b>
                 </p>
             </div>
             <div class="divFr">
@@ -37,16 +37,23 @@
             <div class="moreDiv">
                 <p class="title">
                     <b></b>
+                    <span>集合地点</span>
+                </p>
+                <div class="content ft26 c999">{{ticketInfo.scheduling}}</div>
+            </div>
+            <div class="moreDiv">
+                <p class="title">
+                    <b></b>
                     <span>注意事项</span>
                 </p>
-                <div class="content ft26 c999">这里是注意事项</div>
+                <div class="content ft26 c999">{{ticketInfo.attention}}</div>
             </div>
             <div class="moreDiv">
                 <p class="title">
                     <b></b>
                     <span>景点介绍</span>
                 </p>
-                <div class="content ft26 c999">这里是景点介绍这里是景点介绍这里是景点介绍这里是景点介绍这里是景点介绍</div>
+                <div class="content ft26 c999">{{ticketInfo.introduce}}</div>
             </div>
         </div>
         <div class="photoDiv">
@@ -54,8 +61,8 @@
                 <b></b>
                 <span>景区图片</span>
             </p>
-            <div v-for="item,index in 6">
-                <img src="https://cdn2.pinquduo.cn/5b2324aa8ae6984510.jpg" alt="">
+            <div v-for="item,index in ticketInfo.images">
+                <img v-lazy="item.image" alt="">
             </div>
         </div>
         <div class="btnDiv">
@@ -80,10 +87,25 @@
         name: "detailindex",
         data() {
             return {
-                index: 1
+                index: 1,
+                ticketInfo: {}
             }
         },
+        mounted() {
+            this.getDetail()
+        },
         methods: {
+            // 获取详情信息
+            getDetail() {
+                this.$post('ticket/expert/ticket_detail', {
+                    ticket_id: this.$route.query.ticket_id
+                })
+                    .then(res => {
+                        if (res.code == '200') {
+                            this.ticketInfo = res.data
+                        }
+                    })
+            },
             handleChange(val) {
                 this.index = val + 1
             },
@@ -96,7 +118,7 @@
             },
             // 立即预定
             goPay() {
-                this.$router.push('/pay/index')
+                this.$router.push(`/pay/index?ticket_id=${this.$route.query.ticket_id}`)
             }
         }
     }
@@ -105,6 +127,7 @@
 <style scoped lang="scss">
     .detailDiv {
         padding-bottom: 100px;
+        background-color: white;
         .bannerDiv {
             position: relative;
             .mint-swipe {
