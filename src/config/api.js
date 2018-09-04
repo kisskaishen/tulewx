@@ -55,6 +55,11 @@ export function post(url, data) {
             .then((response) => {
                 if (response.data.code == '200') {
                     resolve(response.data)
+                } else {
+                    Toast({
+                        message: response.data.message,
+                        duration: 1600
+                    })
                 }
             })
             .catch((error) => {

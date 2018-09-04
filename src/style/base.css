@@ -13,6 +13,11 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+/*移动端顺畅滚动*/
+.scroll-touch {
+    -webkit-overflow-scrolling: touch;
+}
+
 li {
     list-style: none;
 }
@@ -22,7 +27,8 @@ a {
     text-align: center;
     color: #999;
 }
-input,textarea,select {
+
+input, textarea, select {
     -webkit-box-shadow: 0 0 0 1000px white inset;
     outline: none;
     padding: 4px;
@@ -30,6 +36,7 @@ input,textarea,select {
     border: 1px solid #ccc;
     -webkit-appearance: none;
     resize: none;
+    margin-left: 10px;
 }
 
 button {
@@ -60,4 +67,14 @@ i {
 .fade-leave-active {
     opacity: 0;
     transition: opacity .5s;
+}
+
+/*!*改变黄标的颜色*!*/
+/*input {*/
+    /*caret-color: red;*/
+/*}*/
+
+
+.mint-toast-text {
+    font-size: 16px !important;
 }

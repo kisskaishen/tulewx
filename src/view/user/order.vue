@@ -80,6 +80,7 @@
                 </ul>
             </mt-tab-container-item>
         </mt-tab-container>
+        <img src="../../imgs/icon-no-order.png" alt="" v-if="orderList==''">
     </div>
 </template>
 
@@ -136,6 +137,10 @@
 </style>
 <style scoped lang="scss">
     .orderDiv {
+        > img {
+            width: 414px;
+            margin-top: 40px;
+        }
         .mint-tab-container {
             margin-top: 100px;
             .mint-tab-container-item {

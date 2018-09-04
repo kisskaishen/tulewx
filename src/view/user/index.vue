@@ -3,7 +3,8 @@
         <div class="userInfoDiv">
             <img src="https://cdn2.pinquduo.cn/5b2324aa8ae6984510.jpg" alt="头像">
             <p class="ft36 cfff">0的离心率</p>
-            <p class="ft28 cfff">（点击绑定信息）</p>
+            <p class="ft28 cfff" @click="goMyInfo" v-if="isBanding=='0'">（点击绑定信息）</p>
+            <p class="ft28 cfff" v-else>{{bindingInfo.member_mobile}}</p>
         </div>
         <div class="menuDiv">
             <div class="ft28">
@@ -57,14 +58,46 @@
                     {label: '我的信息', url: '/user/myInfo'},
                     {label: '常见问题', url: '/user/question'},
                     {label: '关于途乐', url: '/user/about'},
-
-                ]
+                ],
+                isBanding: '0',
+                bindingInfo:{},         // 绑定信息
             }
         },
         components: {vFooter},
         mounted() {
+            this.isBinding()
         },
-        methods: {}
+        methods: {
+            // 判断是否绑定
+            isBinding() {
+                this.$post('member/member/member_index', {
+                    member_id: this.$getCookie('member_id') || '4'
+                })
+                    .then(res => {
+                        if (res.code == '200') {
+                            this.isBanding = res.data.is_bind_info
+                            if (res.data.is_bind_info=='1') {
+                                this.getUserInfo()
+                            }
+                        }
+                    })
+            },
+            // 获取个人信息
+            getUserInfo() {
+                this.$post('member/member/member_info', {
+                    member_id: this.$getCookie('member_id') || '4'
+                })
+                    .then(res => {
+                        if (res.code == '200') {
+                            this.bindingInfo = res.data
+                        }
+                    })
+            },
+            // 点击绑定信息
+            goMyInfo() {
+                this.$router.push('/user/myInfo')
+            },
+        }
 
     }
 </script>
