@@ -1,7 +1,7 @@
 <template>
     <div class="cartDiv">
         <div class="cartImg">
-            <img src="" alt="">
+            <img src="../../imgs/img-cart.png" alt="">
             <button class="brs8">
                 点击购买
             </button>
@@ -31,13 +31,11 @@
             img {
                 display: block;
                 width: 600px;
-                height: 800px;
                 margin: 0 auto;
                 border: none;
                 -webkit-border-radius: 20px;
                 -moz-border-radius: 20px;
                 border-radius: 20px;
-                background: linear-gradient(to right, #ff8484, #ff464e);
             }
             button {
                 margin-top: 40px;

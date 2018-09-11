@@ -119,4 +119,18 @@
         -moz-border-radius: 8px;
         border-radius: 8px;
     }
+
+    .overflow1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .overflow2 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: box;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
 </style>

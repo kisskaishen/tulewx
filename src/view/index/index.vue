@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <p class="name ft30 c666">{{item.ticket_name}}</p>
+                            <p class="name ft30 c666 overflow2">{{item.ticket_name}}</p>
                             <p class="other">
                                 <span class="ft28 c999">出发时间：{{item.leave_date}}</span>
                                 <button class="brs8 ft28">预定</button>

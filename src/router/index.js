@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import envLogin from '../config/envLogin'
+import {getCookie} from "../config/util";
 
 const IndexIndex = r => require.ensure([], () => r(require('@/view/index/index')), 'IndexIndex')
 
@@ -26,7 +28,7 @@ const OrderIndex = r => require.ensure([], () => r(require('@/view/order/index')
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
     mode: 'history',
     routes: [
         {
@@ -41,7 +43,7 @@ export default new Router({
             ],
             meta: {
                 title: '首页',
-                login: false
+                login: true
             }
         },
         {
@@ -163,3 +165,18 @@ export default new Router({
         }
     ]
 })
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some((item) => item.meta.login)) {
+        let member_id = getCookie('member_id')
+        if (member_id) {
+            console.log('member_id')
+        } else {
+            envLogin()
+        }
+    }
+    next()
+})
+
+
+export default router;
