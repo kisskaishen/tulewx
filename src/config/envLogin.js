@@ -24,18 +24,19 @@ export default () => {
             }
         }
     }
+    // let currentHref = encodeURI(location.href)         // 获取当前url
     let currentHref = location.href         // 获取当前url
     if (auto.isWeiXin()) {
-        if (location.search.indexOf('token') == '-1') {
+        if (location.search.indexOf('member_id') == '-1') {
             // location.href = baseUrl + '/login/oauth?type=2&jump_url=' + currentHref
-            location.href = baseUrl + '/member/Wxchat/get_snsapi_userinfo'
+            location.href = baseUrl + 'member/Wxchat/get_snsapi_userinfo?next=' + currentHref
         } else {
             setCookie('member_id', urlSearch('member_id'))
         }
         console.log('这里是微信，调用微信自动登录的接口')
-    // } else{
-    //     console.log('这里是网页版登录，可以手机号登录')
-    //     router.push('/404')
+        // } else{
+        //     console.log('这里是网页版登录，可以手机号登录')
+        //     router.push('/404')
     }
 }
 // https://open.weixin.qq.com/connect/oauth2/authorize?

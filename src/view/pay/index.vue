@@ -58,6 +58,7 @@
 <script>
     import AddTravel from '../../components/addTravel'
     import {Toast} from 'mint-ui'
+
     export default {
         name: "payIndex",
         data() {
@@ -65,6 +66,7 @@
                 payInfo: {ticket: {}},            // 支付页信息
                 userList: [],
                 checkArr: [],
+                checkArrId: [],                  // 游客id
 
                 isShowDialog: false,
             }
@@ -74,7 +76,7 @@
             this.getTravel()
         },
 
-        components:{AddTravel},
+        components: {AddTravel},
 
         methods: {
             // 获取支付页情况
@@ -107,11 +109,13 @@
                         if (this.userList[i].state == false) {
                             this.userList[i].state = true
                             this.checkArr.push(this.userList[i])
+                            this.checkArrId.push(this.userList[i].visit_id)
                         } else {
                             this.userList[i].state = false
                             for (let j = 0; j < this.checkArr.length; j++) {
                                 if (this.userList[i].state == this.checkArr[j].state) {
                                     this.checkArr.splice(j, 1)
+                                    this.checkArrId.splice(j, 1)
                                 }
                             }
                         }
@@ -125,6 +129,15 @@
             },
             // 提交订单并支付
             goPay() {
+                this.$post('order/buy/submit_order', {
+                    cart_id: `${this.$route.query.ticket_id}|${this.checkArr.length}`,
+                    member_id: this.$getCookie('member_id') || '4',
+                    visit_id_arr: JSON.stringify(this.checkArrId),
+                    union_type: '1'
+                })
+                    .then(res => {
+                        location.href = 'https://api.jztule.com/public/wx/weixin_pubilc_pay/example/jsapi.php?pay_sn='+res.data.pay_sn
+                    })
             },
 
             // 监听弹框
@@ -132,7 +145,6 @@
                 this.getTravel()
                 this.isShowDialog = false
             }
-
 
 
         }
