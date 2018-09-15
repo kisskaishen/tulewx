@@ -30,7 +30,7 @@
             padding: 26px;
             img {
                 display: block;
-                width: 600px;
+                width: 400px;
                 margin: 0 auto;
                 border: none;
                 -webkit-border-radius: 20px;

@@ -49,9 +49,9 @@ export function get(url, params = {}) {
     })
 }
 
+
 // post
 export function post(url, data) {
-
     return new Promise((resolve, reject) => {
         axios.post(url, qs.stringify(data))
             .then((response) => {

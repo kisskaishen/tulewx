@@ -13,8 +13,11 @@ Vue.use(MintUI)
 import {get, post, upload, baseUrl} from './config/api'
 import {setCookie, getCookie, clearCookie} from './config/util'
 import Util from './config/util'
-
 Vue.use(Util)
+
+import envLogin from './config/envLogin'
+Vue.use(envLogin)
+
 
 Vue.prototype.$setCookie = setCookie
 Vue.prototype.$getCookie = getCookie

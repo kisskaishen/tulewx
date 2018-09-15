@@ -83,7 +83,7 @@
             getDetail() {
                 this.$post('order/buy/cashier_desk', {
                     ticket_id: this.$route.query.ticket_id,
-                    member_id: this.$getCookie('member_id') || '4'
+                    member_id: this.$getCookie('member_id')
                 })
                     .then(res => {
                         if (res.code == '200') {
@@ -94,7 +94,7 @@
             // 获取游客列表
             getTravel() {
                 this.$post('member/Visiter/visiter_list', {
-                    member_id: this.$getCookie('member_id') || '4'
+                    member_id: this.$getCookie('member_id')
                 })
                     .then(res => {
                         if (res.code == '200') {
@@ -131,7 +131,7 @@
             goPay() {
                 this.$post('order/buy/submit_order', {
                     cart_id: `${this.$route.query.ticket_id}|${this.checkArr.length}`,
-                    member_id: this.$getCookie('member_id') || '4',
+                    member_id: this.$getCookie('member_id'),
                     visit_id_arr: JSON.stringify(this.checkArrId),
                     union_type: '1'
                 })

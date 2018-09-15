@@ -170,7 +170,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some((item) => item.meta.login)) {
         let member_id = getCookie('member_id')
         if (member_id) {
-            console.log('member_id')
+            next();
         } else {
             envLogin()
         }
