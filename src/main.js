@@ -15,8 +15,8 @@ import {setCookie, getCookie, clearCookie} from './config/util'
 import Util from './config/util'
 Vue.use(Util)
 
-import envLogin from './config/envLogin'
-Vue.use(envLogin)
+// import envLogin from './config/envLogin'
+// Vue.use(envLogin)
 
 
 Vue.prototype.$setCookie = setCookie

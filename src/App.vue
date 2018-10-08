@@ -13,16 +13,17 @@
             return {}
         },
         mounted() {
-            if (!this.$getCookie('member_id')) {
-                this.getInfo()
-            }
+            // if (!this.$getCookie('member_id')) {
+            //     this.getInfo()
+            // }
+
         },
         methods: {
             getInfo() {
                 this.$post('member/Wxchat/get_snsapi_userinfo', {})
-                    .then(res => {
-                        console.log(res)
+                    .then((res) => {
                         this.$setCookie('member_id',this.$route.query.member_id)
+
                     })
             }
         }

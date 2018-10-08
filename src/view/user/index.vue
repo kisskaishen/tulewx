@@ -1,8 +1,8 @@
 <template>
     <div class="userDiv">
         <div class="userInfoDiv">
-            <img src="https://cdn2.pinquduo.cn/5b2324aa8ae6984510.jpg" alt="头像">
-            <p class="ft36 cfff">0的离心率</p>
+            <img :src="member_avatar" alt="头像">
+            <p class="ft36 cfff">{{member_nickname}}</p>
             <p class="ft28 cfff" @click="goMyInfo" v-if="isBanding=='0'">（点击绑定信息）</p>
             <p class="ft28 cfff" v-else>{{bindingInfo.member_mobile}}</p>
         </div>
@@ -48,6 +48,8 @@
         name: "userindex",
         data() {
             return {
+                member_avatar:'',
+                member_nickname:'',
                 menuList: [
                     {label: '已支付', value: '20'},
                     {label: '未支付', value: '10'},
@@ -65,11 +67,13 @@
         },
         components: {vFooter},
         mounted() {
+
             this.isBinding()
         },
         methods: {
             // 判断是否绑定
             isBinding() {
+                let that = this
                 this.$post('member/member/member_index', {
                     member_id: this.$getCookie('member_id')
                 })
@@ -90,6 +94,8 @@
                     .then(res => {
                         if (res.code == '200') {
                             this.bindingInfo = res.data
+                            this.member_nickname = decodeURI(decodeURI(this.$getCookie('member_nickname')))
+                            this.member_avatar = this.$getCookie('member_avatar')
                         }
                     })
             },

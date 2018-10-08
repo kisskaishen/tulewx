@@ -39,10 +39,14 @@ let router = new Router({
                 {
                     path: '/index',
                     component: IndexIndex,
+                    meta: {
+                        title: '途乐户外商城',
+                        login: true
+                    }
                 }
             ],
             meta: {
-                title: '首页',
+                title: '途乐户外商城',
                 login: true
             }
         },
@@ -176,6 +180,8 @@ router.beforeEach((to, from, next) => {
         }
     }
     next()
+
+    window.document.title = to.meta.title
 })
 
 

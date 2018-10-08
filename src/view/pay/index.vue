@@ -18,7 +18,7 @@
             <ul>
                 <li v-for="item,index in userList" :class="[{active:userList[index].state},'brs8']"
                     @click="checkUser(item,index)">
-                    <p>{{item.visit_name}}</p>
+                    <p class="ft30">{{item.visit_name}}</p>
                 </li>
                 <li class="addBtn" @click="goAddTravel">
                     <p>+</p>

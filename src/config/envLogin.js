@@ -32,6 +32,11 @@ export default () => {
             location.href = baseUrl + 'member/Wxchat/get_snsapi_userinfo?next=' + currentHref
         } else {
             setCookie('member_id', urlSearch('member_id'))
+            setCookie('member_nickname', urlSearch('member_nickname'))
+            setCookie('member_avatar', urlSearch('member_avatar'))
+            if (urlSearch('member_id')) {
+                location.href = location.href.split('member_id')[0]
+            }
         }
         console.log('这里是微信，调用微信自动登录的接口')
         // } else{
@@ -39,12 +44,3 @@ export default () => {
         //     router.push('/404')
     }
 }
-// https://open.weixin.qq.com/connect/oauth2/authorize?
-// // appid=wxbd86cc1c2f5326b0&
-// // redirect_uri=http%3A%2F%2Fapi.jztule.com%2Fpublic%2Findex.php%2Fmember%2FWxchat%2Fget_snsapi_userinfo
-// &response_type=code
-// &scope=snsapi_userinfo
-// &state=aHR0cHM6Ly93eC5qenR1bGUuY29tLw==
-// &uin=MTU3MjExNjYxMA%3D%3D
-// &key=60090eda14dca763bd4e26bc68e9f406cada0a7f54845d9db0ac2499715b0b3c245c2cc6b9b2fd52ba78f2dbb162e313
-// &pass_ticket=gMbptVcCBSaIXEh1teA7ojDt1aJFVYW6xDSfwcsBog1lSdl2hhizfeCoMt25VFDU7nPhwtX+uEAUrW+oY0jl6w==
