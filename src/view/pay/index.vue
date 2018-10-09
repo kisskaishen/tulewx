@@ -42,7 +42,7 @@
             <div class="btn">
                 <div class="money">
                     共支付
-                    <b class="ft40 cff464e">￥99</b>
+                    <b class="ft40 cff464e">￥{{totalMoney}}</b>
                 </div>
                 <div class="goBtn">
                     <button class="ft32" @click="goPay">立即支付</button>
@@ -81,7 +81,7 @@
             getDetail() {
                 this.$post('order/buy/cashier_desk', {
                     ticket_id: this.$route.query.ticket_id,
-                    member_id: this.$getCookie('member_id') || '4'
+                    member_id: this.$getCookie('member_id')
                 })
                     .then(res => {
                         if (res.code == '200') {
@@ -92,7 +92,7 @@
             // 获取游客列表
             getTravel() {
                 this.$post('member/Visiter/visiter_list', {
-                    member_id: this.$getCookie('member_id') || '4'
+                    member_id: this.$getCookie('member_id')
                 })
                     .then(res => {
                         if (res.code == '200') {
@@ -132,8 +132,6 @@
                 this.getTravel()
                 this.isShowDialog = false
             }
-
-
 
         }
     }

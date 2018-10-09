@@ -54,6 +54,10 @@
         }
     }
 
+    .ftbold {
+        font-weight: bold;
+    }
+
     .red {
         color: red;
     }
@@ -125,6 +129,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+
     .overflow2 {
         overflow: hidden;
         text-overflow: ellipsis;

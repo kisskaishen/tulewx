@@ -10,6 +10,10 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
 
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'         // 2.6.0+版本需要手动添加
+Vue.use(VueAwesomeSwiper)
+
 import {get, post, upload, baseUrl} from './config/api'
 import {setCookie, getCookie, clearCookie} from './config/util'
 import Util from './config/util'
