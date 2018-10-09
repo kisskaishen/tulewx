@@ -109,7 +109,7 @@
             // 判断是否绑定
             isBinding() {
                 this.$post('member/member/member_index', {
-                    member_id: this.$getCookie('member_id') || '4'
+                    member_id: this.$getCookie('member_id')
                 })
                     .then(res => {
                         if (res.code == '200') {
@@ -123,7 +123,7 @@
             // 获取个人信息
             getUserInfo() {
                 this.$post('member/member/member_info', {
-                    member_id: this.$getCookie('member_id') || '4'
+                    member_id: this.$getCookie('member_id')
                 })
                     .then(res => {
                         if (res.code == '200') {
@@ -147,7 +147,7 @@
             // 确认绑定
             sureBinding() {
                 this.$post('member/Member/bind_member_info', {
-                    member_id: this.$getCookie('member_id') || '4',
+                    member_id: this.$getCookie('member_id'),
                     member_mobile: this.tel,
                     member_truename: this.name,
                     id_card_num: this.identity,

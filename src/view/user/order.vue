@@ -99,7 +99,7 @@
         methods: {
             getOrderList(page) {
                 this.$post('order/Order/order_list', {
-                    member_id: this.$getCookie('member_id') || '4',
+                    member_id: this.$getCookie('member_id'),
                     order_state: this.selected,
                     page: page
                 })

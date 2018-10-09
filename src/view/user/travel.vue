@@ -48,7 +48,7 @@
         methods: {
             getTravelList() {
                 this.$post('member/Visiter/visiter_list', {
-                    member_id: this.$getCookie('member_id') || '4'
+                    member_id: this.$getCookie('member_id')
                 })
                     .then(res => {
                         if (res.code == '200') {

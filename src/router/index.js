@@ -39,10 +39,14 @@ let router = new Router({
                 {
                     path: '/index',
                     component: IndexIndex,
+                    meta: {
+                        title: '途乐户外商城',
+                        login: true
+                    }
                 }
             ],
             meta: {
-                title: '首页',
+                title: '途乐户外商城',
                 login: true
             }
         },
@@ -170,12 +174,14 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some((item) => item.meta.login)) {
         let member_id = getCookie('member_id')
         if (member_id) {
-            console.log('member_id')
+            next();
         } else {
             envLogin()
         }
     }
     next()
+
+    window.document.title = to.meta.title
 })
 
 

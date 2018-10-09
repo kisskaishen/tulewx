@@ -33,6 +33,8 @@ axios.interceptors.response.use((response) => {
 // 封装axios
 export let baseUrl = axios.defaults.baseURL
 
+export let baseUrlPay = 'https://api.jztule.com/'
+
 // get
 export function get(url, params = {}) {
     return new Promise((resolve, reject) => {
@@ -47,9 +49,9 @@ export function get(url, params = {}) {
     })
 }
 
+
 // post
 export function post(url, data) {
-
     return new Promise((resolve, reject) => {
         axios.post(url, qs.stringify(data))
             .then((response) => {
