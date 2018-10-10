@@ -111,8 +111,11 @@
 </style>
 <style scoped lang="scss">
     .addTravelDiv {
+        position: relative;
+        width: 100%;
+        height: 100%;
         .dialogDiv {
-            position: relative;
+            position: fixed;
             width: 640px;
             height: 600px;
             padding: 26px 20px;
@@ -120,9 +123,10 @@
             -moz-border-radius: 40px;
             border-radius: 40px;
             background-color: #fff;
-            margin-left: 50%;
-            margin-top: 50%;
-            transform: translate(-50%);
+            left: 50%;
+            top: 50%;
+            margin-left: -320px;
+            margin-top: -300px;
             img {
                 position: absolute;
                 width: 60px;

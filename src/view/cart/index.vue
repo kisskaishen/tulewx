@@ -1,10 +1,8 @@
 <template>
     <div class="cartDiv">
         <div class="cartImg">
-            <img src="../../imgs/img-cart.png" alt="">
-            <button class="brs8">
-                点击购买
-            </button>
+            <img src="../../imgs/img-cart.png" :class="isBuy?'buyHover':''" alt="惠民旅游卡">
+            <button class="brs8 ft32" @click="goBuy">点击购买</button>
         </div>
 
         <v-footer></v-footer>
@@ -13,14 +11,30 @@
 
 <script>
     import vFooter from '../../components/vfooter'
+    import {Toast} from 'mint-ui'
 
     export default {
         name: "cartIndex",
         data() {
-            return {}
+            return {
+                isBuy: false
+            }
         },
         components: {vFooter},
-
+        methods: {
+            goBuy() {
+                this.isBuy = !this.isBuy
+                // this.$post('order/buy/submit_order', {
+                //     cart_id: `${this.$route.query.ticket_id}|${this.checkArr.length}`,
+                //     member_id: this.$getCookie('member_id'),
+                //     visit_id_arr: JSON.stringify(this.checkArrId),
+                //     union_type: '1'
+                // })
+                //     .then(res => {
+                //         location.href = 'https://api.jztule.com/public/wx/weixin_pubilc_pay/example/jsapi.php?pay_sn=' + res.data.pay_sn
+                //     })
+            }
+        }
     }
 </script>
 
@@ -36,6 +50,10 @@
                 -webkit-border-radius: 20px;
                 -moz-border-radius: 20px;
                 border-radius: 20px;
+                transition: All 1s ease-in-out;
+            }
+            .buyHover {
+                transform: rotateY(360deg);
             }
             button {
                 margin-top: 40px;

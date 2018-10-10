@@ -1,6 +1,6 @@
 <template>
     <div class="equipDiv">
-        这里是装备专区
+        装备商城即将上线，敬请期待...
     </div>
 </template>
 

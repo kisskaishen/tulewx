@@ -42,7 +42,8 @@
             <div class="btn">
                 <div class="money">
                     共支付
-                    <b class="ft40 cff464e">￥{{totalMoney}}</b>
+                    <b class="ft28 cff464e">￥</b>
+                    <b class="ft40 cff464e">{{totalMoney}}</b>
                 </div>
                 <div class="goBtn">
                     <button class="ft32" @click="goPay">立即支付</button>
@@ -69,6 +70,7 @@
                 checkArrId: [],                  // 游客id
 
                 isShowDialog: false,
+                totalMoney: 0,                  // 应付金额
             }
         },
         mounted() {
@@ -121,6 +123,17 @@
                         }
                     }
                 }
+                console.log(this.checkArr)
+                let childArr = []
+                let adultArr = []
+                for (let i = 0; i < this.checkArr.length; i++) {
+                    if (this.checkArr[i].is_child == '1') {
+                        childArr.push(this.checkArr[i])
+                    } else {
+                        adultArr.push(this.checkArr[i])
+                    }
+                }
+                this.totalMoney = childArr.length * this.payInfo.ticket.child_price + adultArr.length * this.payInfo.ticket.price
             },
 
             // 去添加顾客信息
@@ -136,7 +149,7 @@
                     union_type: '1'
                 })
                     .then(res => {
-                        location.href = 'https://api.jztule.com/public/wx/weixin_pubilc_pay/example/jsapi.php?pay_sn='+res.data.pay_sn
+                        location.href = 'https://api.jztule.com/public/wx/weixin_pubilc_pay/example/jsapi.php?pay_sn=' + res.data.pay_sn
                     })
             },
 

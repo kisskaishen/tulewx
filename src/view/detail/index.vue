@@ -130,6 +130,7 @@
         background-color: white;
         .bannerDiv {
             position: relative;
+            height: auto;
             .mint-swipe {
                 height: 750px;
                 .mint-swipe-items-wrap {

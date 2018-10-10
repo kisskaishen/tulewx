@@ -1,6 +1,6 @@
 <template>
     <div class="aboutDiv">
-        关于我们
+        关于我们更新中...
     </div>
 </template>
 

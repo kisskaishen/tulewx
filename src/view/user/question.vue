@@ -1,6 +1,6 @@
 <template>
     <div class="travelDiv">
-        常见问题
+        常见问题更新中...
     </div>
 </template>
 
