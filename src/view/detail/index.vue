@@ -132,12 +132,18 @@
             position: relative;
             height: auto;
             .mint-swipe {
-                height: 750px;
+                height: 464px;
                 .mint-swipe-items-wrap {
                     .mint-swipe-item {
+                        position: relative;
+                        height: 464px;
+                        background: rgba(0,0,0,.8);
                         img {
+                            position: relative;
                             width: 100%;
-                            height: 100%;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            /*height: 100%;*/
                         }
                     }
                 }
