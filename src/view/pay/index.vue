@@ -12,9 +12,13 @@
             </div>
         </div>
         <div class="bindingDiv">
-            <p>您当前账户手机号为：{{payInfo.is_bind_mobile}}</p>
+            <p v-if="payInfo.is_bind_mobile!=''">您当前账户手机号为：{{payInfo.is_bind_mobile}}</p>
+            <p v-else>
+                <router-link to="/user/myInfo">点击绑定个人信息</router-link>
+            </p>
         </div>
         <div class="travalDiv">
+            <p>请点击选择游客：</p>
             <ul>
                 <li v-for="item,index in userList" :class="[{active:userList[index].state},'brs8']"
                     @click="checkUser(item,index)">
@@ -58,12 +62,13 @@
 
 <script>
     import AddTravel from '../../components/addTravel'
-    import {Toast} from 'mint-ui'
+    import {Toast,MessageBox} from 'mint-ui'
 
     export default {
         name: "payIndex",
         data() {
             return {
+                isBanding:'',           // 是否绑定信息
                 payInfo: {ticket: {}},            // 支付页信息
                 userList: [],
                 checkArr: [],
@@ -74,6 +79,7 @@
             }
         },
         mounted() {
+            this.isBinding()
             this.getDetail()
             this.getTravel()
         },
@@ -81,6 +87,38 @@
         components: {AddTravel},
 
         methods: {
+            // 判断是否绑定
+            isBinding() {
+                this.$post('member/member/member_index', {
+                    member_id: this.$getCookie('member_id')
+                })
+                    .then(res => {
+                        if (res.code == '200') {
+                            this.isBanding = res.data.is_bind_info
+                            if (this.isBanding == '1') {
+
+                            } else {
+                                this.$session.set('payPath',this.$route.fullPath)
+
+                                MessageBox({
+                                    title: '提示',
+                                    message: '您当前还没有绑定个人信息，点击前往绑定个人信息?',
+                                    showCancelButton: true,
+                                    confirmButtonText: '前去绑定',
+                                    cancelButtonText: '暂不绑定',
+                                    closeOnClickModal:false
+                                }).then(res => {
+                                    if (res=='confirm') {
+                                    this.$router.push('/user/myInfo?from=pay')
+                                } else {
+                                    this.isBinding()
+                                }
+                            })
+                            }
+
+                    }
+                })
+            },
             // 获取支付页情况
             getDetail() {
                 this.$post('order/buy/cashier_desk', {
@@ -162,7 +200,33 @@
         }
     }
 </script>
-
+<style lang="scss">
+    .mint-msgbox {
+        width: 64%;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        .mint-msgbox-title {
+            font-size: 42px;
+        }
+        .mint-msgbox-content {
+            min-height: 80px;
+            .mint-msgbox-message {
+                line-height: 40px;
+            }
+        }
+        .mint-msgbox-btns {
+            height: 80px;
+            .mint-msgbox-cancel {
+                color: #ccc;
+            }
+            .mint-msgbox-confirm {
+                font-size: 32px;
+                color: #ff464e;
+            }
+        }
+    }
+</style>
 <style scoped lang="scss">
     .payIndex {
         position: relative;
@@ -201,6 +265,10 @@
         .travalDiv {
             padding: 20px 26px;
             background-color: #fff;
+            > p {
+                text-align: left;
+                line-height: 60px;
+            }
             ul {
                 display: flex;
                 justify-content: flex-start;

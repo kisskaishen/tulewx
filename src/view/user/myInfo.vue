@@ -33,6 +33,7 @@
             </div>
             <div class="btnDiv">
                 <button class="brs8 ft28" @click="editUser">修改</button>
+                <router-link :to="goPayUrl" class="brs8 ft28 cff464e" v-if="this.$route.query.from == 'pay'">继续购买</router-link>
             </div>
         </div>
         <div class="noUser" v-else>
@@ -100,10 +101,15 @@
 
                 isBanding: '0',
                 bindingInfo: {},         // 绑定信息
+
+                goPayUrl:'',                // 支付页面链接
             }
         },
         mounted() {
             this.isBinding()
+            if (this.$route.query.from == 'pay') {
+                this.goPayUrl = this.$session.get('payPath')
+            }
         },
         methods: {
             // 判断是否绑定
@@ -192,6 +198,10 @@
             }
         }
         .btnDiv {
+            a {
+                padding: 20px 60px;
+                border: 2px solid #ff464e;
+            }
             button {
                 padding: 20px 60px;
                 background: linear-gradient(to right, #ff8484, #ff464e);

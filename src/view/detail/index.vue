@@ -30,14 +30,14 @@
                 </p>
             </div>
             <div class="divFr">
-                <b class="ft48 cff464e">￥99</b>
+                <b class="ft48 cff464e">￥{{ticketInfo.sale_price}}</b>
             </div>
         </div>
         <div class="moreDetailDiv">
             <div class="moreDiv">
                 <p class="title">
                     <b></b>
-                    <span>集合地点</span>
+                    <span>行程安排</span>
                 </p>
                 <div class="content ft26 c999">{{ticketInfo.scheduling}}</div>
             </div>
@@ -218,6 +218,7 @@
             > div {
                 width: 100%;
                 img {
+                    display: block;
                     width: 100%;
                 }
             }
