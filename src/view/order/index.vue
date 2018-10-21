@@ -24,6 +24,10 @@
                 </li>
             </ul>
         </div>
+        <div class="btnDiv">
+            <button class="goBuyBtn">继续购买</button>
+            <button class="goHomeBtn">回到首页</button>
+        </div>
     </div>
 </template>
 
@@ -110,6 +114,28 @@
                     }
                 }
             }
+        }
+        .btnDiv {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            button {
+                width: 240px;
+                height: 80px;
+                font-size: 32px;
+                -webkit-border-radius: 20px;
+                -moz-border-radius: 20px;
+                border-radius: 20px;
+            }
+            .goBuyBtn {
+                background: linear-gradient(to right, #ff8484, #ff464e);
+            }
+            .goHomeBtn {
+                color: #ff464e;
+                border: 2px solid #ff464e;
+                background-color: transparent;
+            }
+
         }
     }
 </style>
