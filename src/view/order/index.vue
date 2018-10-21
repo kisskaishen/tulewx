@@ -25,8 +25,9 @@
             </ul>
         </div>
         <div class="btnDiv">
-            <button class="goBuyBtn">继续购买</button>
-            <button class="goHomeBtn">回到首页</button>
+            <button class="goBuyBtn" @click="goBuy">继续购买</button>
+
+            <button class="goHomeBtn" @click="goHome">回到首页</button>
         </div>
     </div>
 </template>
@@ -52,6 +53,17 @@
                             this.orderInfo = res.data
                         }
                     })
+            },
+            goHome() {
+                this.$router.push('/index')
+            },
+            goBuy() {
+                this.$router.push({
+                    path:'/detail/index',
+                    query:{
+                        ticket_id:this.orderInfo.goods_id
+                    }
+                })
             }
         },
     }
