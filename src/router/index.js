@@ -183,6 +183,13 @@ router.beforeEach((to, from, next) => {
 
     window.document.title = to.meta.title
 })
+router.afterEach((to, from, next) => {
+    if (to.fullPath!='/index') {
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+        window.pageYOffset = 0
+    }
+})
 
 
 export default router;

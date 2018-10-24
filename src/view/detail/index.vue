@@ -68,27 +68,45 @@
         <div class="btnDiv">
             <div class="btn">
                 <div class="goHome ft666" @click="goHome"><i></i><span>首页</span></div>
-                <div class="cantact">
-                    <a href="tel:13798238693">
+                <div class="cantact" @click="showTel">
+                    <div>
                         <i></i>
                         <span>联系客服</span>
-                    </a>
+                    </div>
                 </div>
                 <div class="goBtn">
                     <button class="ft32" @click="goPay">立即预定</button>
                 </div>
             </div>
         </div>
+        <div class="contactDiv">
+            <mt-actionsheet
+                :actions="actions"
+                v-model="sheetVisible">
+            </mt-actionsheet>
+        </div>
     </div>
 </template>
 
 <script>
+    // import { Actionsheet } from 'mint-ui';
     export default {
         name: "detailindex",
         data() {
             return {
                 index: 1,
-                ticketInfo: {}
+                ticketInfo: {},
+                actions:[
+                    {
+                        name:'途乐陈',
+                        method:this.telChen
+                    },
+                    {
+                        name:'途乐夏夏',
+                        method:this.telXia
+                    }
+                ],
+                sheetVisible:false
             }
         },
         mounted() {
@@ -112,6 +130,16 @@
 
 
             // 底部操作
+            // 联系客服
+            showTel() {
+                this.sheetVisible = true
+            },
+            telChen() {
+                window.location.href = 'tel://13939107958'
+            },
+            telXia() {
+                window.location.href = 'tel://13523356978'
+            },
             // 回到首页
             goHome() {
                 this.$router.push('/')
@@ -124,6 +152,17 @@
     }
 </script>
 
+<style lang="scss">
+    .detailDiv {
+        .mint-actionsheet {
+            .mint-actionsheet-listitem,.mint-actionsheet-button {
+                height: 80px !important;
+                line-height: 80px !important;
+                font-size: 32px;
+            }
+        }
+    }
+    </style>
 <style scoped lang="scss">
     .detailDiv {
         padding-bottom: 100px;
@@ -245,7 +284,7 @@
                 }
                 .cantact {
                     flex: 1;
-                    a {
+                    > div {
                         i {
                             margin: 0 auto;
                             width: 48px;
