@@ -24,15 +24,14 @@
         methods: {
             goBuy() {
                 this.isBuy = !this.isBuy
-                // this.$post('order/buy/submit_order', {
-                //     cart_id: `${this.$route.query.ticket_id}|${this.checkArr.length}`,
-                //     member_id: this.$getCookie('member_id'),
-                //     visit_id_arr: JSON.stringify(this.checkArrId),
-                //     union_type: '1'
-                // })
-                //     .then(res => {
-                //         location.href = 'https://api.jztule.com/public/wx/weixin_pubilc_pay/example/jsapi.php?pay_sn=' + res.data.pay_sn
-                //     })
+                this.$post('order/buy/submit_order', {
+                    cart_id:'21|1',
+                    member_id: this.$getCookie('member_id'),
+                    union_type: '3'
+                })
+                    .then(res => {
+                        location.href = 'https://api.jztule.com/public/wx/weixin_pubilc_pay/example/jsapi.php?pay_sn=' + res.data.pay_sn
+                    })
             }
         }
     }
